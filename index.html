@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <!-- Trigram -->
@@ -16,25 +16,72 @@
   </div>
 
   <div class="container">
-    <p>
-      Entrez dans le champ ci-dessous le trigramme de l'hôpital qui vous intéresse :
-    </p>
+    <div class="row">
+      <div class="col">
+        <p>
+          Entrez dans le champ ci-dessous le trigramme de l'hôpital :
+        </p>
 
-    <form class="form-inline" onkeypress="return event.keyCode != 13">
-      <div class="input-group mb-3">
-        <input
-          id="trigram"
-          class="form-control"
-          type="text"
-          placeholder="Trigramme"
-          onkeyup="this.value = this.value.toUpperCase();"
-        >
-        <div class="input-group-append">
-          <button id="btn-action" class="btn btn-outline-primary" type="button" onClick="addField()">✛</button>
-          <button id="btn-remove" class="btn btn-outline-danger" type="button" onClick="removeFields()">✕</button>
-        </div>
+        <form class="form-inline" onkeypress="return event.keyCode != 13">
+          <div class="input-group mb-3">
+            <input
+            id="trigram-input"
+            class="form-control"
+            type="text"
+            placeholder="Trigramme"
+            onkeyup="this.value = this.value.toUpperCase();"
+            >
+            <div class="input-group-append">
+              <button id="btn-action" class="btn btn-outline-primary" type="button" onClick="actionInput()">✛</button>
+              <button id="btn-remove" class="btn btn-outline-danger" type="button" onClick="removeFields()">✕</button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+
+      <div class="col">
+        <p>Ou sélectionnez un hôpital à partir de la liste ci-dessous :</p>
+        <form>
+        <select
+        id="trigram-select-menu"
+        class="custom-select mb-3"
+        onchange="actionSelectMenu()"
+        >
+          <option selected>Hôpitaux</option>
+          <option value="APR">Ambroise Paré</value>
+          <option value="ABC">Antoine Béclère</value>
+          <option value="AVC">Avicenne</value>
+          <option value="BJN">Beaujon</value>
+          <option value="BCT">Bicêtre</value>
+          <option value="BCH">Bichat</value>
+          <option value="BRT">Bretonneau</value>
+          <option value="BRC">Broca</value>
+          <option value="CFX">Charles Foix</value>
+          <option value="CCH">Cochin</value>
+          <option value="CCL">Corentin Celton</value>
+          <option value="ERX">Emile Roux</value>
+          <option value="EGP">HEGP</value>
+          <option value="HMN">Henri Mondor</value>
+          <option value="HTD">Hôtel Dieu</value>
+          <option value="JVR">Jean Verdier</value>
+          <option value="LRB">Lariboisière</value>
+          <option value="LMR">Louis Mourier</value>
+          <option value="NCK">Necker</value>
+          <option value="PBR">Paul Brousse</value>
+          <option value="PSL">Pitié Salpétrière</value>
+          <option value="RPC">Raymond Poincaré</value>
+          <option value="RMB">René Muret</value>
+          <option value="RDB">Robert Debré</value>
+          <option value="RTH">Rothschild</value>
+          <option value="SAT">Saint Antoine</value>
+          <option value="SLS">Saint Louis</value>
+          <option value="SPR">Sainte Perine</value>
+          <option value="TNN">Tenon</value>
+          <option value="TRS">Trousseau</value>
+        </select>
+      </form>
+      </div>
+    </div>
 
     <div id="container" class="row">
       <div id="container-0" class="col">
@@ -49,18 +96,20 @@
   -->
 
   <script type="text/javascript">
-    var input = document.getElementById("trigram");
+    var input = document.getElementById("trigram-input");
     input.addEventListener("keyup", function(event) {
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("btn-action").click();
-    }
-  });
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("btn-action").click();
+      }
+    });
+    input.focus();
   </script>
 
   <script type="text/javascript">
-    var n_trigram = 2;
+    var n_trigram = 0;
   </script>
+
 </body>
 </html>

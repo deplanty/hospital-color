@@ -6,21 +6,19 @@ function removeFields() {
   col_2.innerHTML = "";
 
   n_trigram = 0;
-  document.getElementById("trigram").focus();
+  document.getElementById("trigram-input").focus();
 }
 
-function addField() {
-  // Get elements in the page
-  var trigram = document.getElementById("trigram");
+function addField(trigram) {
   var container = document.getElementById("container-" + n_trigram % 2);
-  trigram.focus();
+  document.getElementById("trigram-input").focus();
   // Verify input
-  if (trigram.value.length < 3) {
+  if (trigram.length < 3) {
     return;
-  } else if (trigram.value.length == 3) {
-    var hexa = fromTrigram(trigram.value);
-  } else if (trigram.value.length > 3) {
-    var hexa = fromText(trigram.value);
+  } else if (trigram.length == 3) {
+    var hexa = fromTrigram(trigram);
+  } else if (trigram.length > 3) {
+    var hexa = fromText(trigram);
   }
   // Get hexa code
   if (hexa == "."){
@@ -37,7 +35,7 @@ function addField() {
   var span = document.createElement("span");
   span.className = "input-group-text";
   span.style.fontFamily = "Consolas";
-  var text = document.createTextNode(trigram.value.toString());
+  var text = document.createTextNode(trigram);
   span.appendChild(text);
   div.appendChild(span);
   bloc.appendChild(div);
@@ -56,8 +54,21 @@ function addField() {
   container.appendChild(bloc);
 
   // Reset input value
-  trigram.value = "";
   n_trigram++;
+}
+
+function actionInput() {
+  var trigram = document.getElementById("trigram-input");
+  addField(trigram.value);
+  trigram.value = "";
+  trigram.focus();
+}
+
+function actionSelectMenu() {
+  var select = document.getElementById("trigram-select-menu");
+  var trigram = select.options[select.selectedIndex]
+  addField(trigram.value);
+  select.selectedIndex = 0;
 }
 
 function fromTrigram(tri) {
