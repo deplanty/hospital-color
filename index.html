@@ -42,42 +42,8 @@
       <div class="col">
         <p>Ou sélectionnez un hôpital à partir de la liste ci-dessous :</p>
         <form>
-        <select
-        id="trigram-select-menu"
-        class="custom-select mb-3"
-        onchange="actionSelectMenu()"
-        >
+        <select id="trigram-select-menu" class="custom-select mb-3" onchange="actionSelectMenu()">
           <option selected>Hôpitaux</option>
-          <option value="APR">Ambroise Paré</value>
-          <option value="ABC">Antoine Béclère</value>
-          <option value="AVC">Avicenne</value>
-          <option value="BJN">Beaujon</value>
-          <option value="BCT">Bicêtre</value>
-          <option value="BCH">Bichat</value>
-          <option value="BRT">Bretonneau</value>
-          <option value="BRC">Broca</value>
-          <option value="CFX">Charles Foix</value>
-          <option value="CCH">Cochin</value>
-          <option value="CCL">Corentin Celton</value>
-          <option value="ERX">Emile Roux</value>
-          <option value="EGP">HEGP</value>
-          <option value="HMN">Henri Mondor</value>
-          <option value="HTD">Hôtel Dieu</value>
-          <option value="JVR">Jean Verdier</value>
-          <option value="LRB">Lariboisière</value>
-          <option value="LMR">Louis Mourier</value>
-          <option value="NCK">Necker</value>
-          <option value="PBR">Paul Brousse</value>
-          <option value="PSL">Pitié Salpétrière</value>
-          <option value="RPC">Raymond Poincaré</value>
-          <option value="RMB">René Muret</value>
-          <option value="RDB">Robert Debré</value>
-          <option value="RTH">Rothschild</value>
-          <option value="SAT">Saint Antoine</value>
-          <option value="SLS">Saint Louis</value>
-          <option value="SPR">Sainte Perine</value>
-          <option value="TNN">Tenon</value>
-          <option value="TRS">Trousseau</value>
         </select>
       </form>
       </div>
@@ -96,7 +62,8 @@
   -->
 
   <script type="text/javascript">
-    var input = document.getElementById("trigram-input");
+    // Remove the form actions
+    let input = document.getElementById("trigram-input");
     input.addEventListener("keyup", function(event) {
       // Number 13 is the "Enter" key on the keyboard
       if (event.keyCode === 13) {
@@ -109,6 +76,22 @@
 
   <script type="text/javascript">
     var n_trigram = 0;
+  </script>
+
+  <script type="text/javascript" src="data/list-trigrams.json">
+    // Load the list of trigrams
+  </script>
+
+  <script type="text/javascript">
+    // Put the list of trigrams in the select element
+    let select = document.getElementById("trigram-select-menu");
+    for (let hospital in list_trigrams) {
+      let opt = document.createElement("option");
+      let text = document.createTextNode(hospital);
+      opt.value = list_trigrams[hospital];
+      opt.appendChild(text);
+      select.appendChild(opt);
+    }
   </script>
 
 </body>
