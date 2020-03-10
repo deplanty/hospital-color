@@ -13,7 +13,6 @@ function removeFields() {
 function addField(trigram) {
   // Add a line to the view
   let container = document.getElementById("container-" + n_trigram % 2);
-  document.getElementById("trigram-input").focus();
   let hexa = ".";
   // Verify input
   if (trigram.length < 3) {
