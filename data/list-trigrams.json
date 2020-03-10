@@ -1,4 +1,3 @@
-
 var list_trigrams = {
   "Ambroise Paré": "APR",
   "Antoine Béclère": "ABC",

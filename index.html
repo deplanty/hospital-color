@@ -78,20 +78,12 @@
     var n_trigram = 0;
   </script>
 
+  <!-- TODO: C'est moche -->
   <script type="text/javascript" src="data/list-trigrams.json">
-    // Load the list of trigrams
   </script>
 
   <script type="text/javascript">
-    // Put the list of trigrams in the select element
-    let select = document.getElementById("trigram-select-menu");
-    for (let hospital in list_trigrams) {
-      let opt = document.createElement("option");
-      let text = document.createTextNode(hospital);
-      opt.value = list_trigrams[hospital];
-      opt.appendChild(text);
-      select.appendChild(opt);
-    }
+    setOptionsInSelect(list_trigrams);
   </script>
 
 </body>
